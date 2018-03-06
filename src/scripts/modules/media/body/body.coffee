@@ -70,6 +70,8 @@ define (require) ->
       if (canonicalPath isnt "/#{currentRoute}")
         # replace previous URL with the canonical path
         router.navigate(canonicalPath, {replace: true})
+      # it shoud be send in the end of the process - when we have pageId and canonicalPath
+      @parent.parent.parent.trackAnalytics()
 
     updateTeacher: ($temp = @$el) ->
       $els = $temp.find('.os-teacher')
@@ -417,7 +419,7 @@ define (require) ->
       currentPage = @model.asPage()
       return unless currentPage?
       page = currentPage ? @model.get('contents')?.models[0]?.get('book')
-    
+
       return unless currentPage.get('active')
       if @model.get('sims') is true
         @parent?.regions.self.append(new SimModal({model: @model}))

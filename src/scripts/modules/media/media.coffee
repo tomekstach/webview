@@ -51,7 +51,8 @@ define (require) ->
       @model = new Content({id: @uuid, version: options.version, page: options.page})
       @minimal = options.minimal
 
-      @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
+      # I don't know how move this into the end of the process
+      # @listenTo(@model, 'change:googleAnalytics', @trackAnalytics)
       @listenTo(@model, 'change:title change:parent.id', @updatePageInfo)
       if not @minimal
         @listenTo(@model, 'change:legacy_id change:legacy_version change:currentPage
@@ -247,4 +248,3 @@ define (require) ->
 
     resetKeySequence: (e) ->
       return
-
